@@ -23,7 +23,7 @@ Options:
 		Show this help message and exit
 ```
 
-There are three test files, in different formats, that all contain white space in D5, "        tester3", and they can be run via:
+There are three test files, in different formats, that all contain white space in the cell 'D5', "        tester3", and they can be run via:
 
 ```
 Rscript --vanilla WStrimR.R -f Test_files/c_fail_missing_values-v1.3.1.tsv
