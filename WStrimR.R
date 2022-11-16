@@ -106,6 +106,7 @@ if (ext == "tsv"){
   stop("\n\nERROR: Please submit a data file that is in either xlsx, tsv or csv format.\n\n")
 }
 
+                 
 #Write out file
 if (ext == "tsv"){
   suppressMessages(write_tsv(df, file = paste(output_file,".tsv",sep = ""), na=""))
@@ -113,13 +114,9 @@ if (ext == "tsv"){
   suppressMessages(write_csv(df, file = paste(output_file,".csv",sep = ""), na=""))
 }else if (ext == "xlsx"){
   wb=openxlsx::loadWorkbook(file = file_path)
-  
   openxlsx::deleteData(wb, sheet = sheet_name,rows = 1:(dim(df)[1]+1),cols=1:(dim(df)[2]+1),gridExpand = TRUE)
-  
   openxlsx::writeData(wb=wb, sheet=sheet_name, df)
-  
   openxlsx::saveWorkbook(wb = wb,file = paste(path,output_file,".xlsx",sep = ""), overwrite = T)
 }
-
 
 cat(paste("\n\nProcess Complete.\n\nThe output file can be found here: ",path,"\n\n",sep = "")) 
