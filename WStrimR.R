@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-#Cancer Data Services - WStrimR.R
+#WStrimR.R
 
 #This script will take a table structured file and trim the white space on a data frame.
 
