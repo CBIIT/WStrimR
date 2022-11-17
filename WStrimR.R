@@ -95,13 +95,15 @@ output_file=paste(file_name,
                   sep="")
 
 
+NA_bank=c("NA","na","N/A","n/a")
+
 #Read in file with trim_ws=TRUE
 if (ext == "tsv"){
-  df=suppressMessages(read_tsv(file = file_path, trim_ws = TRUE, guess_max = 1000000, col_types = cols(.default = col_character())))
+  df=suppressMessages(read_tsv(file = file_path, trim_ws = TRUE, na=NA_bank, guess_max = 1000000, col_types = cols(.default = col_character())))
 }else if (ext == "csv"){
-  df=suppressMessages(read_csv(file = file_path, trim_ws = TRUE, guess_max = 1000000, col_types = cols(.default = col_character())))
+  df=suppressMessages(read_csv(file = file_path, trim_ws = TRUE, na=NA_bank, guess_max = 1000000, col_types = cols(.default = col_character())))
 }else if (ext == "xlsx"){
-  df=suppressMessages(read_xlsx(path = file_path, trim_ws = TRUE, sheet = sheet_name, guess_max = 1000000, col_types = "text"))
+  df=suppressMessages(read_xlsx(path = file_path, trim_ws = TRUE, na=NA_bank, sheet = sheet_name, guess_max = 1000000, col_types = "text"))
 }else{
   stop("\n\nERROR: Please submit a data file that is in either xlsx, tsv or csv format.\n\n")
 }
@@ -109,9 +111,9 @@ if (ext == "tsv"){
                  
 #Write out file
 if (ext == "tsv"){
-  suppressMessages(write_tsv(df, file = paste(output_file,".tsv",sep = ""), na=""))
+  suppressMessages(write_tsv(df, file = paste(path,output_file,".tsv",sep = ""), na=""))
 }else if (ext == "csv"){
-  suppressMessages(write_csv(df, file = paste(output_file,".csv",sep = ""), na=""))
+  suppressMessages(write_csv(df, file = paste(path,output_file,".csv",sep = ""), na=""))
 }else if (ext == "xlsx"){
   wb=openxlsx::loadWorkbook(file = file_path)
   openxlsx::deleteData(wb, sheet = sheet_name,rows = 1:(dim(df)[1]+1),cols=1:(dim(df)[2]+1),gridExpand = TRUE)
